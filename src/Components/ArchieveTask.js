@@ -9,18 +9,23 @@ function ArchieveTask() {
   return Object.keys(list).length === 0 ? (
     <div>NO LIST FOUND</div>
   ) : Object.keys(list).length > 2 ? (
-    list
-      .reverse()
-      .filter((item, idx) => idx > 1)
-      .map((list) => {
-        return (
-          <div className='archieve__container'>
-            <div>{list.title}</div>
-            <div>{list.description}</div>
-            <div>{list.date}</div>
-          </div>
-        );
-      })
+    <div className='task__container'>
+      {list
+        .reverse()
+        .filter((item, idx) => idx > 1)
+        .map((list) => {
+          return (
+            <div className='done__content'>
+              <div className='done__title'>Title: {list.title}</div>
+              <div className='done__description'>
+                Description: {list.description}
+              </div>
+              <div className='done__date'>Date/Time: {list.date}</div>
+              <div className='done__text'>ARCHIVE TASK</div>
+            </div>
+          );
+        })}
+    </div>
   ) : null;
 }
 

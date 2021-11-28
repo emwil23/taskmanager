@@ -14,8 +14,9 @@ function TaskCard(props) {
     var storage = [];
     storage = JSON.parse(localStorage.getItem('lists'));
 
-    storage[id - 1].task.push({ sub: text });
+    storage[id - 1].task.push({ sub: text, checked: 0 });
     localStorage.setItem('lists', JSON.stringify(storage));
+    // props.setList(JSON.parse(localStorage.getItem('lists')));
   };
 
   useEffect(() => {
@@ -28,24 +29,26 @@ function TaskCard(props) {
       var newList = JSON.parse(localStorage.getItem('lists'));
       props.updateList(newList);
     }
-  }, [counter, id, task.length, props]);
+  }, [counter]);
 
   return props.progressToken &&
     task.length !== 0 &&
     task.length > counter &&
     doneTask !== 1 ? (
     <div className='task__list' key={id}>
-      <div className='task__title'>{title}</div>
-      <div className='task__description'>{description}</div>
-      <div className='task__date'>{date}</div>
-      <div>
+      <div className='task__title'>Title: {title}</div>
+      <div className='task__description'>Description: {description}</div>
+      <div className='task__date'>Date/Time: {date}</div>
+      <div className='task__sub'>
         Subtasks
         {console.log(counter)}
-        {task.map((tsk) => {
+        {task.map((tsk, index) => {
           return (
             <SubTaskCard
               key={tsk.value}
+              id={id}
               subTask={tsk}
+              subIndex={index}
               taskLength={task.length}
               setCounter={setCounter}
               counter={counter}
@@ -74,11 +77,11 @@ function TaskCard(props) {
     </div>
   ) : !props.progressToken && task.length === 0 ? (
     <div className='task__list' key={id}>
-      <div className='task__title'>{title}</div>
-      <div className='task__description'>{description}</div>
-      <div className='task__date'>{date}</div>
+      <div className='task__title'>Title: {title}</div>
+      <div className='task__description'>Description: {description}</div>
+      <div className='task__date'>Date/Time: {date}</div>
       <button className='task__addsub' onClick={() => setsubBTN(!subBTN)}>
-        Add Sub
+        {subBTN ? '-' : '+'}
       </button>
       {subBTN ? (
         <div className='sub__container'>
@@ -91,7 +94,7 @@ function TaskCard(props) {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            <button>+</button>
+            <button className='sub__submit'>+</button>
           </form>
         </div>
       ) : null}

@@ -16,7 +16,9 @@ function CreateTask(props) {
       '  ' +
       date.getHours() +
       ':' +
-      date.getMinutes();
+      date.getMinutes() +
+      ':' +
+      date.getSeconds();
 
     var lists = JSON.parse(localStorage.getItem('lists')) || [];
 
@@ -35,10 +37,11 @@ function CreateTask(props) {
 
   return (
     <div>
-      <form className='form' onSubmit={(e) => handleSubmit(e)}>
-        <div className='form__input'>
+      <form className='form__createTask' onSubmit={(e) => handleSubmit(e)}>
+        <div className='createTask__input'>
           <input
             name='title'
+            className='createTask__input-title'
             type='text'
             required
             placeholder='Title'
@@ -47,13 +50,14 @@ function CreateTask(props) {
           />
           <input
             name='description'
+            className='createTask__input-description'
             type='text'
             required
             placeholder='Description'
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
           />
-          <button>Create Task</button>
+          <button className='createTask__input-submit'>Create Task</button>
         </div>
       </form>
     </div>

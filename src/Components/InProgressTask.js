@@ -11,11 +11,13 @@ function InProgressTask(props) {
   return Object.keys(props.list).length === 0 ? (
     <div className='loader'>No Task in Progres</div>
   ) : (
-    props.list.map((list) => {
-      return (
-        <TaskCard list={list} progressToken={true} updateList={handleList} />
-      );
-    })
+    <div className='task__container'>
+      {props.list.map((list) => {
+        return (
+          <TaskCard list={list} progressToken={true} updateList={handleList} />
+        );
+      })}
+    </div>
   );
 }
 

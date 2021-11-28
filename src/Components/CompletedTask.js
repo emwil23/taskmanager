@@ -9,20 +9,26 @@ function CompletedTask() {
   return Object.keys(list).length === 0 ? (
     <div>NO TASKS PRESENT</div>
   ) : (
-    list
-      .reverse()
-      .slice(0, 10)
-      .map((list) => {
-        if (list.doneTask === 1) {
-          return (
-            <div className='done__container'>
-              <div className='done__title'>{list.title}</div>
-              <div className='done__description'>{list.description}</div>
-              <div className='done__date'>{list.date}</div>
-            </div>
-          );
-        } else return null;
-      })
+    <div className='task__container'>
+      COMPLETED TASK LIST
+      {list
+        .reverse()
+        .slice(0, 10)
+        .map((list) => {
+          if (list.doneTask === 1) {
+            return (
+              <div className='done__content'>
+                <div className='done__title'>Title: {list.title}</div>
+                <div className='done__description'>
+                  Description: {list.description}
+                </div>
+                <div className='done__date'>Date/Time: {list.date}</div>
+                <div className='done__text'>Task Completed</div>
+              </div>
+            );
+          } else return null;
+        })}
+    </div>
   );
 }
 

@@ -8,7 +8,7 @@ function NewTask(props) {
     <div className='loader'>No List</div>
   ) : (
     <div className='task__container'>
-      NEW TASK
+      NEW TASK LIST
       {props.list.map((list) => {
         if (list.task.length === 0)
           return <TaskCard list={list} key={list.id} />;
