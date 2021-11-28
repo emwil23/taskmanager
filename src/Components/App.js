@@ -1,7 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+//Components
+import CreateTask from './CreateTask';
+import Header from './Header';
+import NewTask from './NewTask';
+import InProgress from './InProgressTask';
+import CompletedTask from './CompletedTask';
+import ArchieveTask from './ArchieveTask';
 
 function App() {
-  return <div>App!</div>;
+  const [list, setList] = useState(() => {
+    const saved = JSON.parse(localStorage.getItem('lists')) || [];
+    return saved;
+  });
+
+  const [selected, setSelected] = useState('');
+
+  return (
+    <div className='main__container'>
+      <CreateTask list={list} setList={setList} />
+      <Header setSelected={setSelected} />
+      {selected === '' ? (
+        <NewTask list={list} setList={setList} />
+      ) : selected === 'inprogress' ? (
+        <InProgress list={list} setList={setList} />
+      ) : selected === 'completed' ? (
+        <CompletedTask />
+      ) : (
+        <ArchieveTask />
+      )}
+    </div>
+  );
 }
 
 export default App;
