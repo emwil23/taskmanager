@@ -4,7 +4,7 @@ function ArchieveTask() {
   const [list] = useState(() => {
     const saved = JSON.parse(localStorage.getItem('lists')) || [];
     return saved;
-  });
+  }); // Retrive all the list
 
   return Object.keys(list).length === 0 ? (
     <div>NO LIST FOUND</div>

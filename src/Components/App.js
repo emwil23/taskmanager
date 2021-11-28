@@ -10,11 +10,12 @@ import ArchieveTask from './ArchieveTask';
 
 function App() {
   const [list, setList] = useState(() => {
+    //Keeps track of all the lists
     const saved = JSON.parse(localStorage.getItem('lists')) || [];
     return saved;
   });
 
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(''); //Kepp track of the selected layout screen
 
   return (
     <div className='main__container'>

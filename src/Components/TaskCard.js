@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react';
 import SubTaskCard from './SubTaskCard';
 
 function TaskCard(props) {
-  const [subBTN, setsubBTN] = useState(false);
-  const [text, setText] = useState('');
-  const [counter, setCounter] = useState(0);
+  //HANDLES ALL THE DATA FOR THE NEW LIST ASWELL AS INPROGRESS LIST
+  const [subBTN, setsubBTN] = useState(false); //ADD SUB-TASK BTN STATE
+  const [text, setText] = useState(''); //TRACK THE SUB-TASK TEXT
+  const [counter, setCounter] = useState(0); //COUNT THE LENGTH OF THE TASK THAT IS COMPLETED
   const { id, title, description, date, task, doneTask } = props.list;
 
   const handleSubmit = (e) => {
@@ -34,7 +35,7 @@ function TaskCard(props) {
   return props.progressToken &&
     task.length !== 0 &&
     task.length > counter &&
-    doneTask !== 1 ? (
+    doneTask !== 1 ? ( //CHECK IF THE TASK IS COMPLETED OR NOT || CHECK IF THE SUB TASK IS COMPLETED OR NOT
     <div className='task__list' key={id}>
       <div className='task__title'>Title: {title}</div>
       <div className='task__description'>Description: {description}</div>
@@ -44,7 +45,7 @@ function TaskCard(props) {
         {console.log(counter)}
         {task.map((tsk, index) => {
           return (
-            <SubTaskCard
+            <SubTaskCard // RETRIVES THE SUB TASK DATA AND THE COUNT OF TASK COMPLETED
               key={tsk.value}
               id={id}
               subTask={tsk}
@@ -57,7 +58,7 @@ function TaskCard(props) {
         })}
       </div>
       <button className='task__addsub' onClick={() => setsubBTN(!subBTN)}>
-        Add Sub
+        {subBTN ? '-' : '+'}
       </button>
       {subBTN ? (
         <div className='sub__container'>
@@ -70,7 +71,7 @@ function TaskCard(props) {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            <button>+</button>
+            <button className='task__addsub'>+</button>
           </form>
         </div>
       ) : null}

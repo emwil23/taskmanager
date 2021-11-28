@@ -1,11 +1,11 @@
 import React from 'react';
 
-//Componnets
+//Componets
 import TaskCard from './TaskCard';
 
 function InProgressTask(props) {
   const handleList = (e) => {
-    props.setList(e);
+    props.setList(e); //PASS THE NEW LIST TO THE LIST STATE IN APP COMPONENT
   };
 
   return Object.keys(props.list).length === 0 ? (

@@ -4,7 +4,7 @@ function CompletedTask() {
   const [list] = useState(() => {
     const saved = JSON.parse(localStorage.getItem('lists')) || [];
     return saved;
-  });
+  }); // Retirive all the list items
 
   return Object.keys(list).length === 0 ? (
     <div>NO TASKS PRESENT</div>
